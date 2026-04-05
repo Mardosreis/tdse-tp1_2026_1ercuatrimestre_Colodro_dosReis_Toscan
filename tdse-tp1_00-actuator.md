@@ -57,18 +57,22 @@ LED OFF
 Tabla de Estados y Excitaciones del modelo Actuator
 (Actuator Statechart - State Transition Table)
 
-| Current State | Event | Guard | Next State | Actions |
-|--------------|------|-------|------------|---------|
-| OFF | EV_LED_ON | - | ON | LED_Set(ON) |
-| OFF | EV_LED_BLINK_START | - | BLINK | timer = 0 |
-| OFF | EV_LED_PULSE | - | PULSE | LED_Set(ON), timer = 0 |
-| OFF | EV_LED_N_PULSES | - | N_PULSES | pulse_count = N, timer = 0 |
-| ON | EV_LED_OFF | - | OFF | LED_Set(OFF) |
-| ON | EV_LED_BLINK_START | - | BLINK | timer = 0 |
-| ON | EV_LED_PULSE | - | PULSE | timer = 0 |
-| BLINK | EV_LED_BLINK_STOP | - | OFF | LED_Set(OFF) |
-| BLINK | TICK | timer >= period | BLINK | Toggle LED, timer = 0 |
-| PULSE | TICK | timer >= T_pulse | OFF | LED_Set(OFF) |
-| PULSE | TICK | timer < T_pulse | PULSE | timer++ |
-| N_PULSES | TICK | timer >= period | N_PULSES | Toggle LED, timer = 0, pulse_count-- |
-| N_PULSES | TICK | pulse_count == 0 | OFF | LED_Set(OFF) |
+## Actuator Statechart - State Transition Table
+
+| Current State | Event | [Guard] | Next State | Actions |
+|--------------|------|--------|------------|---------|
+| ST_LED_OFF | EV_LED_ON | - | ST_LED_ON | LED_Set(ON) |
+| ST_LED_OFF | EV_LED_BLINK_START | - | ST_LED_BLINK | tick = T_BLINK |
+| ST_LED_OFF | EV_LED_PULSE | - | ST_LED_PULSE | LED_Set(ON), tick = T_PULSE |
+| ST_LED_OFF | EV_LED_N_PULSES | - | ST_LED_N_PULSES | pulse_count = N, tick = T_BLINK |
+| ST_LED_ON | EV_LED_OFF | - | ST_LED_OFF | LED_Set(OFF) |
+| ST_LED_ON | EV_LED_BLINK_START | - | ST_LED_BLINK | tick = T_BLINK |
+| ST_LED_ON | EV_LED_PULSE | - | ST_LED_PULSE | tick = T_PULSE |
+| ST_LED_BLINK | EV_LED_BLINK_STOP | - | ST_LED_OFF | LED_Set(OFF) |
+| ST_LED_BLINK | TICK | [tick > 0] | ST_LED_BLINK | tick-- |
+| ST_LED_BLINK | TICK | [tick == 0] | ST_LED_BLINK | Toggle LED, tick = T_BLINK |
+| ST_LED_PULSE | TICK | [tick > 0] | ST_LED_PULSE | tick-- |
+| ST_LED_PULSE | TICK | [tick == 0] | ST_LED_OFF | LED_Set(OFF), raise EV_LED_DONE |
+| ST_LED_N_PULSES | TICK | [tick > 0] | ST_LED_N_PULSES | tick-- |
+| ST_LED_N_PULSES | TICK | [tick == 0 && pulse_count > 0] | ST_LED_N_PULSES | Toggle LED, tick = T_BLINK, pulse_count-- |
+| ST_LED_N_PULSES | TICK | [pulse_count == 0] | ST_LED_OFF | LED_Set(OFF), raise EV_LED_DONE |
