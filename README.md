@@ -4,10 +4,10 @@
 ## Trabajo Práctico N°: 1 - Diagramas de Estado - Modelado 
 ### 2026 - 1er Cuatrimestre - Grupo: Colodro, dos Reis y Toscan
 ### Responsable de la entrega: 
-#| Padrón | Apellidos, Nombres      | Fecha    | Deadline  | 
-#| 106433 | Colodro, Felipe         | :------: | :-------: | 
-#| 111545 | dos Reis, Mariana       |          | Semana 04 | 
-#| 111106 | Toscan, Uma             |          | Semana 04 |
+# | Padrón | Apellidos, Nombres      | Fecha    | Deadline  | 
+# | 106433 | Colodro, Felipe         | :------: | :-------: | 
+# | 111545 | dos Reis, Mariana       |          | Semana 04 | 
+# | 111106 | Toscan, Uma             |          | Semana 04 |
 
 
 Eventos
