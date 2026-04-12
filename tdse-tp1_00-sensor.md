@@ -19,7 +19,7 @@ Las acciones reflejan cambios de posición del botón y pueden ser:
 
 ---
 
-### Tabla de Transiciones (simplificada)
+### Tabla de Transiciones
 | Current State   | Event        | [Guard]     | Next State     | Actions                |
 |-----------------|--------------|-------------|----------------|------------------------|
 | ST_BTN_UP       | EV_BTN_UP    |             | ST_BTN_UP      |                        |
