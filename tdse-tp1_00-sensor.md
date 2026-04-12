@@ -5,9 +5,8 @@ El modelo Sensor se implementa como un módulo temporizado (Update by Time Code,
 ###  Eventos del Sensor
 El botón binario genera dos eventos principales asociados a su posición física:
 
-- **EV_BTN_UP** -> el botón está en posición *no presionado*.  
-- **EV_BTN_DOWN** -> el botón está en posición *presionado*.  
-- **EV_BTN_FALLING** -> el botón está en posición *presionado*.
+- **EV_BTN_UP** -> el botón está en posición no presionado.  
+- **EV_BTN_DOWN** -> el botón está en posición presionado.  
   
 Estos eventos accionan transiciones en la máquina de estados del Sensor.
 
