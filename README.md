@@ -6,9 +6,6 @@
 ### Responsable de la entrega: 
 ### | Padrón | Apellidos, Nombres       | Fecha    | Deadline  | 
 #### | 106433 | Colodro, Felipe         | :------: | Semana 04 | 
-#### | 111545 | dos Reis, Mariana       |          | Semana 04 | 
-#### | 111106 | Toscan, Uma             |          | Semana 04 |
-
 
 Eventos
 
