@@ -36,25 +36,13 @@ Los eventos son los triggers que disparan transiciones en la FSM del System:
 
 | Estado Actual          | Evento / Condición       | [Guard]        | Próximo Estado        | Acciones                                                                 |
 |------------------------|--------------------------|----------------|-----------------------|--------------------------------------------------------------------------|
-| **ST_SYS_IDLE**        | EV_SYS_1_Loading         | —              | ST_SYS_Processing     | Inicializar `tick = DEL_SYS_MAX`, raise `EV_ACT_DISPLAY_UPDATE`          |
-| **ST_SYS_Processing**  | EV_SYS_1_Loading         | [tick = 5]     | ST_SYS_CreatingTicket | Registrar solicitud, raise `EV_ACT_PRINT`                                |
-| **ST_SYS_Processing**  | EV_SYS_ERROR1           | [tick == 0]    | ST_SYS_IDLE           | Reset del sistema, raise `EV_ACT_DISPLAY_UPDATE` con mensaje de error    |
-| **ST_SYS_CreatingTicket** | EV_SYS_1_Print        | [tick = 5]     | ST_SYS_Ticket_PNT     | Encender LED impresora, `ticket_ready = true`                            |
-| **ST_SYS_CreatingTicket** | EV_SYS_ERROR2        | [tick == 0]    | ST_SYS_Prossesing           | Reset del sistema, raise `EV_ACT_DISPLAY_UPDATE` con mensaje de error    |
-| **ST_SYS_Ticket_PNT**  | EV_SYS_1_Barrier         | [tick = 5]     | ST_SYS_Barrier        | raise `EV_ACT_BARRIER_OPEN`, `barrier_open = true`                       |
-| **ST_SYS_Ticket_PNT**  | EV_SYS_ERROR3           | [tick == 0]    | ST_SYS_CreatingTicket | Reset parcial, volver a creación de ticket                               |
-| **ST_SYS_Barrier**     | EV_SYS_1_Barrier         | [tick = 5]     | ST_SYS_IDLE           | Apagar LED barrera, `barrier_open = false`, volver a espera              |
-| **ST_SYS_Barrier**     | EV_SYS_ERROR4           | [tick == 0]    | ST_SYS_CreatingTicket     | Reset parcial, volver a procesamiento inicial                            |
-| **Cualquier estado**   | EV_SYS_reset             | —              | ST_SYS_IDLE           | Reset completo del sistema                                               |
+| **ST_SYS_IDLE**        | EV_SYS_1_Loading         | —              | ST_SYS_Processing     |                                                                          |
+| **ST_SYS_Processing**  | EV_SYS_1_Loading         | [tick = 5]     | ST_SYS_CreatingTicket | Tick--                                                                   |
+| **ST_SYS_Processing**  | EV_SYS_ERROR1           | [tick == 0]    | ST_SYS_IDLE            |                                                                          |
+| **ST_SYS_CreatingTicket** | EV_SYS_1_Print        | [tick = 5]     | ST_SYS_Ticket_PNT     | Tick--                                                                   |
+| **ST_SYS_CreatingTicket** | EV_SYS_ERROR2        | [tick == 0]    | ST_SYS_Prossesing      |                                                                          |
+| **ST_SYS_Ticket_PNT**  | EV_SYS_1_Barrier         | [tick = 5]     | ST_SYS_Barrier        | Tick--                                                                   |
+| **ST_SYS_Ticket_PNT**  | EV_SYS_ERROR3           | [tick == 0]    | ST_SYS_CreatingTicket  |                                                                          |
+| **ST_SYS_Barrier**     | EV_SYS_ERROR4           | [tick == 0]    | ST_SYS_CreatingTicket  |                                                                          |
+| **ST_SYS_Barrier**     | EV_SYS_reset             | —              | ST_SYS_IDLE           | Reset completo del sistema                                               |
 
-
-| Estado Actual          | Evento / Condición       | [Guard]        | Próximo Estado        | Acciones                                                                 |
-|------------------------|--------------------------|----------------|-----------------------|--------------------------------------------------------------------------|
-| **ST_SYS_IDLE**        | EV_SYS_BTN_DOWN          | —              | ST_SYS_Processing     | Inicializar `tick = DEL_SYS_MAX`, raise `EV_ACT_DISPLAY_UPDATE`          |
-| **ST_SYS_Processing**  | EV_SYS_1_Loading         | —              | ST_SYS_CraftingTicket | Registrar solicitud, raise `EV_ACT_PRINT`                                |
-| **ST_SYS_CraftingTicket** | EV_SYS_1_Impression   | [tick == 5]    | ST_SYS_Ticket_PNT     | Encender LED impresora, `ticket_ready = true`                            |
-| **ST_SYS_Ticket_PNT**  | EV_SYS_TICKET_VALID      | —              | ST_SYS_Barrier        | raise `EV_ACT_BARRIER_OPEN`, `barrier_open = true`                       |
-| **ST_SYS_Barrier**     | EV_SYS_1_Barrier         | [tick == 5]    | ST_SYS_IDLE           | Apagar LED barrera, `barrier_open = false`, volver a espera              |
-| **Cualquier estado**   | EV_SYS_ERRORx            | [tick == 0]    | ST_SYS_IDLE           | Reset del sistema, raise `EV_ACT_DISPLAY_UPDATE` con mensaje de error    |
-
----
