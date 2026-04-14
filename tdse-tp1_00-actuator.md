@@ -35,4 +35,4 @@ Los estados representan las fases operativas del LED:
 | **ST_LED_1_BLINK**     | EV_LED_1_Barrier       | [tick = 5]     | ST_LED_1_ON       | Tick--                                           |
 | **ST_LED_1_BLINK**  | EV_LED_1_ERROR1       | [tick == 0]     | ST_LED_1_OFF       |                  |
 | **ST_LED_1_ON**     | EV_LED_1_ERROR2        | [tick == 0]    | ST_LED_1_BLINK       |                                  |
-| **ST_LED_1_ON**  | EV_LED_1_Reset        | [tick = 5]    | ST_LED_1_OFF       | raise `EV_SYS_ERROR2`, apagar LED                                        |
+| **ST_LED_1_ON**  | EV_LED_1_Reset        | [tick == 0]    | ST_LED_1_OFF       |                 |
